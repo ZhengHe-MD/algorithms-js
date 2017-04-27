@@ -1,0 +1,23 @@
+{
+  "name": "algorithms-js",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:ZhengHe-MD/algorithms-js.git",
+  "author": "Zheng He <zhenghe@madadata.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "tape -r babel-register tests/**/*.spec.js | faucet",
+    "precommit": "lint-staged"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-flow": "^6.23.0",
+    "babel-register": "^6.24.1",
+    "faucet": "^0.0.1",
+    "flow": "^0.2.3",
+    "flow-bin": "^0.44.2",
+    "lint-staged": "^3.4.0",
+    "prettier": "^1.2.2",
+    "tape": "^4.6.3"
+  }
+}
