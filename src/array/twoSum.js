@@ -12,16 +12,16 @@ Example:
 */
 
 function twoSum(intArr: Array<number>, target: number): ?[number, number] {
-  const resToIdx = {}
-  let tuple = null
+  const resToIdx = {};
+  let tuple = null;
   intArr.forEach((ele, idx) => {
     if (ele in resToIdx) {
-      tuple = [resToIdx[ele], idx]
+      tuple = [resToIdx[ele], idx];
     } else {
-      resToIdx[target - ele] = idx
+      resToIdx[target - ele] = idx;
     }
-  })
-  return tuple
+  });
+  return tuple;
 }
 
-module.exports = twoSum
+module.exports = twoSum;

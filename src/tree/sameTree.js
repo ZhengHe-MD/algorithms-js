@@ -1,6 +1,6 @@
 // @flow
 
-const { BinaryTreeNode } = require('./tree');
+const { BinaryTreeNode } = require("./tree");
 
 /*
 Given two binary trees, write a function to check
@@ -14,10 +14,10 @@ function isSameTree(p: ?BinaryTreeNode, q: ?BinaryTreeNode): boolean {
     return true;
   }
   if (p && q && p.val === q.val) {
-    return isSameTree(p.left, q.left) && isSameTree(p.right, q.right)
+    return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
   }
 
-  return false
+  return false;
 }
 
 /*
@@ -28,4 +28,4 @@ function isSameTree(p: ?BinaryTreeNode, q: ?BinaryTreeNode): boolean {
   levels of recursion is the mininum height between the two trees.
 */
 
-module.exports = isSameTree
+module.exports = isSameTree;

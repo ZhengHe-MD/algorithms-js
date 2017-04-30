@@ -13,21 +13,21 @@ Given the below binary tree and sum = 22,
         7    2      1
 return true, as there exist a root-to-leaf path 5->4->11->2 which sum is 22.
 */
-const { BinaryTreeNode } = require('./tree');
+const { BinaryTreeNode } = require("./tree");
 
-function hasPathSum (root: ?BinaryTreeNode, sum: number): boolean {
+function hasPathSum(root: ?BinaryTreeNode, sum: number): boolean {
   if (!root) {
-    return false
+    return false;
   }
 
   if (!root.left && !root.right && root.val === sum) {
-    return true
+    return true;
   }
 
-  const res = sum - root.val
-  return hasPathSum(root.left, res) || hasPathSum(root.right, res)
+  const res = sum - root.val;
+  return hasPathSum(root.left, res) || hasPathSum(root.right, res);
 }
 
 module.exports = {
   hasPathSum
-}
+};
