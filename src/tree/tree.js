@@ -16,16 +16,20 @@ type NestedTreeNodeTripple = [number | NestedTreeNodeTripple, number | NestedTre
 
 function buildBinaryTree (nestedTripple: NestedTreeNodeTripple): BinaryTreeNode {
   const root = new BinaryTreeNode(nestedTripple[2])
-  if (typeof(nestedTripple[0]) === 'number') {
-    root.left = new BinaryTreeNode(nestedTripple[0])
-  } else {
-    root.left = buildBinaryTree(nestedTripple[0])
+  if (nestedTripple[0]) {
+    if (typeof(nestedTripple[0]) === 'number') {
+      root.left = new BinaryTreeNode(nestedTripple[0])
+    } else {
+      root.left = buildBinaryTree(nestedTripple[0])
+    }
   }
 
-  if (typeof(nestedTripple[1]) === 'number') {
-    root.right = new BinaryTreeNode(nestedTripple[1])
-  } else {
-    root.right = buildBinaryTree(nestedTripple[1])
+  if (nestedTripple[1]) {
+    if (typeof(nestedTripple[1]) === 'number') {
+      root.right = new BinaryTreeNode(nestedTripple[1])
+    } else {
+      root.right = buildBinaryTree(nestedTripple[1])
+    }
   }
 
   return root
