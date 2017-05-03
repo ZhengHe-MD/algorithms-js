@@ -1,5 +1,7 @@
 // @flow
 
+type TraverseType = "pre" | "in" | "post";
+
 class Node {
   value: number;
   left: ?Node;
@@ -89,6 +91,39 @@ class BinarySearchTree {
       }
     }
     return false;
+  }
+
+  traverseDFS(fn: Function, name: TraverseType = "pre") {
+    const current = this.root;
+    const nameToMethod = {
+      pre: this._preOrder,
+      in: this._inOrder,
+      post: this._postOrder
+    };
+    nameToMethod[name](current, fn);
+  }
+
+  _preOrder(node: ?Node, fn: Function) {
+    if (node instanceof Node) {
+      fn(node);
+      this._preOrder(node.left, fn);
+      this._preOrder(node.right, fn);
+    }
+  }
+
+  _inOrder(node: ?Node, fn: Function) {
+    if (node instanceof Node) {
+      this._inOrder(node.left, fn);
+      fn(node);
+      this._inOrder(node.right, fn);
+    }
+  }
+
+  _postOrder(node: ?Node, fn: Function) {
+    if (node instanceof Node) {
+      this._postOrder(node.left, fn);
+      this._postOrder(node.right, fn);
+    }
   }
 
   getMin(node: Node): number {
