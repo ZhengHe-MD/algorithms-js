@@ -1,4 +1,5 @@
 // @flow
+const Queue = require("./queue");
 
 type TraverseType = "pre" | "in" | "post";
 
@@ -93,14 +94,27 @@ class BinarySearchTree {
     return false;
   }
 
-  traverseDFS(fn: Function, name: TraverseType = "pre") {
+  traverseBFS(fn: Function) {
+    const q = new Queue();
+    q.enqueue(this.root);
+    while (q.length()) {
+      const node = q.dequeue();
+      fn(node);
+      if (node instanceof Node) {
+        if (node.left) {
+          q.enqueue(node.left);
+        }
+        if (node.right) {
+          q.enqueue(node.right);
+        }
+      }
+    }
+  }
+
+  traverseDFS(fn: Function, type: TraverseType = "pre") {
     const current = this.root;
-    const nameToMethod = {
-      pre: this._preOrder,
-      in: this._inOrder,
-      post: this._postOrder
-    };
-    nameToMethod[name](current, fn);
+    // $FlowFixMe: https://github.com/facebook/flow/issues/2286
+    this[`_${type}Order`](current, fn);
   }
 
   _preOrder(node: ?Node, fn: Function) {
@@ -123,6 +137,7 @@ class BinarySearchTree {
     if (node instanceof Node) {
       this._postOrder(node.left, fn);
       this._postOrder(node.right, fn);
+      fn(node);
     }
   }
 
@@ -138,6 +153,31 @@ class BinarySearchTree {
       node = node.right;
     }
     return node.value;
+  }
+
+  getHeight(node: ?Node): number {
+    if (node instanceof Node) {
+      const leftHeight = this.getHeight(node.left);
+      const rightHeight = this.getHeight(node.right);
+      return Math.max(leftHeight, rightHeight) + 1;
+    } else {
+      return -1;
+    }
+  }
+
+  isBalanced(node: ?Node): boolean {
+    if (node instanceof Node) {
+      if (
+        (node.left === null && node.right === null) ||
+        (node.left instanceof Node && node.right instanceof Node)
+      ) {
+        return this.isBalanced(node.left) && this.isBalanced(node.right);
+      } else {
+        return false;
+      }
+    } else {
+      return true;
+    }
   }
 }
 
